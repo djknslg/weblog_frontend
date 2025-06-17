@@ -13,6 +13,7 @@ import CategoryArticleList from '@/pages/frontend/category-article-list.vue'
 import TagList from '@/pages/frontend/tag-list.vue'
 import TagArticleList from '@/pages/frontend/tag-article-list.vue'
 import ArticleDetail from '@/pages/frontend/article-detail.vue'
+import NotFound from '@/pages/frontend/404.vue'
 
 
 
@@ -73,6 +74,14 @@ const routes = [
     component: ArticleDetail,
     meta: { // meta 信息
       title: 'Weblog 详情页'
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',  //404页
+    name: 'NotFound',
+    component: NotFound,
+    meta: {
+      title: '404 页'
     }
   },
 

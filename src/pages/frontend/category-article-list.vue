@@ -18,7 +18,7 @@
           </h1>
           <ol v-if="articles.length > 0" class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
             <li v-for="(article, index) in articles" :key="index">
-              <a href="#" class="items-center block p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
+              <a @click="goArticleDetailPage(article.id)" class="items-center block p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
                 <img class="w-24 h-12 mb-3 mr-3 rounded-lg sm:mb-0"
                      src="https://img.quanxiaoha.com/quanxiaoha/193dd1504ebb4f138085acb23619e0dd.jpg" />
                 <div class="text-gray-600 dark:text-gray-400">
@@ -116,11 +116,13 @@ import UserInfoCard from '@/layouts/frontend/components/UserInfoCard.vue'
 import TagListCard from '@/layouts/frontend/components/TagListCard.vue'
 import CategoryListCard from '@/layouts/frontend/components/CategoryListCard.vue'
 import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
 import { getCategoryArticlePageList } from '@/api/frontend/category'
 
 
 const route = useRoute()
+
+const router =useRouter();
 
 // 分类名称
 const categoryName = ref(route.query.name)
@@ -162,4 +164,8 @@ function getCategoryArticles(currentNo) {
   })
 }
 getCategoryArticles(current.value)
+
+const goArticleDetailPage = (articleId) => {
+  router.push('/article/' + articleId)
+}
 </script>

@@ -7,9 +7,9 @@ import { getArticlePageList } from '@/api/frontend/article'
 import UserInfoCard from '@/layouts/frontend/components/UserInfoCard.vue'
 import CategoryListCard from '@/layouts/frontend/components/CategoryListCard.vue'
 import TagListCard from '@/layouts/frontend/components/TagListCard.vue'
-import {useRouter,useRoute} from 'vue-router'
+import {useRouter} from 'vue-router'
 
-const router=new useRouter();
+ const  router =new useRouter();
 // initialize components based on data attribute selectors
 onMounted(() => {
   initTooltips();
