@@ -1,6 +1,8 @@
 import axios from "axios";
-import { getToken, removeToken } from '@/composables/cookie.js'
-import { showMessage } from '@/composables/util.js'
+import { getToken } from '@/composables/cookie.js';
+import { showMessage } from '@/composables/util.js';
+import { useUserStore } from '@/stores/user.js';
+
 
 // 创建 Axios 实例
 const instance = axios.create({
@@ -37,7 +39,8 @@ instance.interceptors.response.use(function (response) {
   console.log(error)
   const status= error.response.status
   if (status===401){
-    removeToken()
+    const userStore = useUserStore()
+    userStore.logout()
     location.reload()
   }
 
