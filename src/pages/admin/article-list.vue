@@ -165,6 +165,7 @@
 
       <!-- 分页列表 -->
       <el-table :data="tableData" border stripe style="width: 100%" v-loading="tableLoading">
+        <el-table-column prop="id" label="ID" width="50" />
         <el-table-column prop="title" label="标题" width="180" />
         <el-table-column prop="cover" label="封面" width="180">
         <template #default="scope">
@@ -179,6 +180,11 @@
                 <Edit />
               </el-icon>
               编辑</el-button>
+            <el-button size="small" @click="goArticleDetailPage(scope.row.id)">
+              <el-icon class="mr-1">
+                <View />
+              </el-icon>
+              预览</el-button>
             <el-button type="danger" size="small" @click="deleteArticleSubmit(scope.row)">
               <el-icon class="mr-1">
                 <Delete />
@@ -213,7 +219,9 @@ import { uploadFile } from '@/api/admin/file'
 import { getCategorySelectList } from '@/api/admin/category'
 import {getTagSearchList} from '@/api/admin/tag.js'
 import { getArticlePageList, deleteArticle, getArticleDetail, updateArticle,publishArticle } from '@/api/admin/article.js'
+import {useRouter} from 'vue-router'
 
+const router=useRouter();
 // 模糊搜索的文章标题
 const searchArticleTitle = ref('')
 
@@ -310,9 +318,6 @@ const handleSizeChange = (chooseSize) => {
 
 // 删除文章
 const deleteArticleSubmit = (row) => {
-  console.log("111111111")
-  console.log(row)
-  console.log(row.id)
   showModel('是否确定要删除该文章？').then(() => {
     deleteArticle(row.id).then((res) => {
       if (res.success == false) {
@@ -536,6 +541,11 @@ const publishArticleSubmit = () => {
       getTableData()
     })
   })
+}
+
+//跳转文章详情页
+const goArticleDetailPage = (articleId) => {
+  router.push('/article/' + articleId)
 }
 
 </script>
